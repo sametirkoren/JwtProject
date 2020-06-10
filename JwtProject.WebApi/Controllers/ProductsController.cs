@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jwt.Business.Interfaces;
 using JwtProject.Entities.Concrete;
+using JwtProject.Entities.Dtos.ProductDtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,10 +39,15 @@ namespace JwtProject.WebApi.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Add(Product product)
+        public async Task<IActionResult> Add(ProductAddDto productAddDto)
         {
-            await _productService.Add(product);
-            return Created("", product);
+            if (ModelState.IsValid)
+            {
+                await _productService.Add(new Product { Name = productAddDto.Name });
+                return Created("", productAddDto);
+            }
+            return BadRequest(productAddDto);
+           
         }
 
         [HttpPut]

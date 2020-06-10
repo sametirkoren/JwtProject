@@ -1,7 +1,10 @@
-﻿using Jwt.Business.Concrete;
+﻿using FluentValidation;
+using Jwt.Business.Concrete;
 using Jwt.Business.Interfaces;
+using Jwt.Business.ValidationRules.FluentValidation;
 using JwtProject.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using JwtProject.DataAccess.Interfaces;
+using JwtProject.Entities.Dtos.ProductDtos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -27,6 +30,8 @@ namespace Jwt.Business.Containers.MicrosoftIoC
 
             services.AddScoped<IAppUserRoleDal, EfAppUserRoleRepository>();
             services.AddScoped<IAppUserRoleService, AppUserRoleManager>();
+
+            services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
         }
     }
 }
