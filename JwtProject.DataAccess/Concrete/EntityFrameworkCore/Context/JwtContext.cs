@@ -1,4 +1,5 @@
-﻿using JwtProject.Entities.Concrete;
+﻿using JwtProject.DataAccess.Concrete.EntityFrameworkCore.Mapping;
+using JwtProject.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ namespace JwtProject.DataAccess.Concrete.EntityFrameworkCore.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new AppUserMap());
+            modelBuilder.ApplyConfiguration(new AppRoleMap());
+            modelBuilder.ApplyConfiguration(new AppUserRoleMap());
+            modelBuilder.ApplyConfiguration(new ProductMap());
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
