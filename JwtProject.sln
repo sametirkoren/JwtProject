@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtProject.Entities", "JwtProject.Entities\JwtProject.Entities.csproj", "{271E2DFE-EC59-4CB2-8AA1-4D40AEACFB06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtProject.DataAccess", "JwtProject.DataAccess\JwtProject.DataAccess.csproj", "{504EE2EC-CF9C-40DA-8B39-F72DA94382C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtProject.DataAccess", "JwtProject.DataAccess\JwtProject.DataAccess.csproj", "{504EE2EC-CF9C-40DA-8B39-F72DA94382C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt.Business", "Jwt.Business\Jwt.Business.csproj", "{70CF45E9-4375-4BA1-B7B6-294F73351DEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{504EE2EC-CF9C-40DA-8B39-F72DA94382C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{504EE2EC-CF9C-40DA-8B39-F72DA94382C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{504EE2EC-CF9C-40DA-8B39-F72DA94382C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
