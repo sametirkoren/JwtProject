@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JwtProject.DataAccess.Concrete.Mapping
+namespace JwtProject.DataAccess.Concrete.EntityFrameworkCore.Mapping
 {
     public class AppUserMap : IEntityTypeConfiguration<AppUser>
     {

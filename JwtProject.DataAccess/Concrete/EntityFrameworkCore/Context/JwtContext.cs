@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JwtProject.DataAccess.Concrete.EntityFrameworkCore
+namespace JwtProject.DataAccess.Concrete.EntityFrameworkCore.Context
 {
     public class JwtContext:DbContext
     {
