@@ -13,6 +13,11 @@ namespace JwtProject.DataAccess.Concrete.EntityFrameworkCore
             optionsBuilder.UseSqlServer("server=.;database=JwtDB;trusted_connection=true;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
         public DbSet<AppUserRole> AppUserRoles { get; set; }
