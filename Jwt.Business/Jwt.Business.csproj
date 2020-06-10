@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JwtProject.DataAccess\JwtProject.DataAccess.csproj" />
   </ItemGroup>
 
