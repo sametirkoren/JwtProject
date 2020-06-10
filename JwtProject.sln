@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtProject.DataAccess", "Jw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt.Business", "Jwt.Business\Jwt.Business.csproj", "{70CF45E9-4375-4BA1-B7B6-294F73351DEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtProject.WebApi", "JwtProject.WebApi\JwtProject.WebApi.csproj", "{AE8C68F4-EDF6-46E6-A541-6EE17A7F9848}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70CF45E9-4375-4BA1-B7B6-294F73351DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE8C68F4-EDF6-46E6-A541-6EE17A7F9848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE8C68F4-EDF6-46E6-A541-6EE17A7F9848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE8C68F4-EDF6-46E6-A541-6EE17A7F9848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE8C68F4-EDF6-46E6-A541-6EE17A7F9848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
