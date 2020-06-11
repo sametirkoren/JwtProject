@@ -39,7 +39,8 @@ namespace JwtProject.WebApi.Controllers
             {
                 if(await _appUserService.CheckPassword(appUserLoginDto))
                 {
-                    var token = _jwtService.GenereateJwtToken(appUser, null);
+                    var roles = await _appUserService.GetRolesByUserName(appUserLoginDto.UserName);
+                    var token = _jwtService.GenereateJwtToken(appUser, roles);
                     return Created("", token);
                 }
 
