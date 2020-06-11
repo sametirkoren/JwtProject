@@ -39,6 +39,8 @@ namespace Jwt.Business.Containers.MicrosoftIoC
             services.AddScoped<IJwtService, JwtManager>();
 
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
+
+            services.AddTransient<IValidator<AppUserAddDto>, AppUserAddDtoValidator>();
         }
     }
 }
