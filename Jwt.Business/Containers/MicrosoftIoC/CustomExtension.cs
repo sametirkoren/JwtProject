@@ -4,6 +4,7 @@ using Jwt.Business.Interfaces;
 using Jwt.Business.ValidationRules.FluentValidation;
 using JwtProject.DataAccess.Concrete.EntityFrameworkCore.Repositories;
 using JwtProject.DataAccess.Interfaces;
+using JwtProject.Entities.Dtos.AppUserDtos;
 using JwtProject.Entities.Dtos.ProductDtos;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -34,6 +35,10 @@ namespace Jwt.Business.Containers.MicrosoftIoC
             services.AddTransient<IValidator<ProductAddDto>, ProductAddDtoValidator>();
 
             services.AddTransient<IValidator<ProductUpdateDto>, ProductUpdateDtoValidator>();
+
+            services.AddScoped<IJwtService, JwtManager>();
+
+            services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
         }
     }
 }
