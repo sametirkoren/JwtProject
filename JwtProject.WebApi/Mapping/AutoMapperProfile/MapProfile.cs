@@ -20,7 +20,7 @@ namespace JwtProject.WebApi.Mapping.AutoMapperProfile
             CreateMap<Product, ProductUpdateDto>();
 
             CreateMap<AppUserAddDto, AppUser>();
-            CreateMap<AppUser , AppUserAddDto>
+            CreateMap<AppUser, AppUserAddDto>();
         }
     }
 }

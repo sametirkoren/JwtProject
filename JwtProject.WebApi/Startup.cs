@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using Jwt.Business.Containers.MicrosoftIoC;
+using Jwt.Business.Interfaces;
 using Jwt.Business.StringInfos;
 using JwtProject.WebApi.CustomFilters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +34,7 @@ namespace JwtProject.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependencies();
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped(typeof(ValidId<>));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
@@ -50,7 +53,7 @@ namespace JwtProject.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , IAppUserService appUserService, IAppUserRoleService appUserRoleService, IAppRoleService appRoleService)
         {
             //if (env.IsDevelopment())
             //{
@@ -60,7 +63,7 @@ namespace JwtProject.WebApi
 
             //localhost/error
             app.UseExceptionHandler("/Error");
-
+            JwtIdentityInitializer.Seed(appUserService, appUserRoleService, appRoleService).Wait();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
