@@ -10,12 +10,11 @@ namespace JwtProject.WebApi
 {
     public static class JwtIdentityInitializer
     {
-        public static async Task Seed(IAppUserService appUserService , IAppUserRoleService appUserRoleService , IAppRoleService  appRoleService)
+        public static async Task Seed(IAppUserService appUserService, IAppUserRoleService appUserRoleService, IAppRoleService appRoleService)
         {
-            // ilgili rol var mı ? 
-            var adminRole = appRoleService.FindByName(RoleInfo.Admin);
-            
-            if(adminRole == null)
+            //ilgili rol varmı?
+            var adminRole = await appRoleService.FindByName(RoleInfo.Admin);
+            if (adminRole == null)
             {
                 await appRoleService.Add(new AppRole
                 {
@@ -23,8 +22,7 @@ namespace JwtProject.WebApi
                 });
             }
 
-            var memberRole = appRoleService.FindByName(RoleInfo.Member);
-
+            var memberRole = await appRoleService.FindByName(RoleInfo.Member);
             if (memberRole == null)
             {
                 await appRoleService.Add(new AppRole
@@ -33,17 +31,18 @@ namespace JwtProject.WebApi
                 });
             }
 
-            var adminUser = await appUserService.FindByUserName("samet");
-            if(adminUser == null)
+            var adminUser = await appUserService.FindByUserName("sametirkoren");
+            if (adminUser == null)
             {
                 await appUserService.Add(new AppUser
                 {
                     FullName = "Samet İrkören",
-                    UserName = "samet",
+                    UserName = "sametirkoren",
                     Password = "1"
                 });
+
                 var role = await appRoleService.FindByName(RoleInfo.Admin);
-                var admin = await appUserService.FindByUserName("samet");
+                var admin = await appUserService.FindByUserName("sametirkoren");
 
                 await appUserRoleService.Add(new AppUserRole
                 {
@@ -51,8 +50,6 @@ namespace JwtProject.WebApi
                     AppRoleId = role.Id
                 });
             }
-
-          
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Jwt.Business.Interfaces;
+using Jwt.Business.StringInfos;
 using JwtProject.Entities.Concrete;
 using JwtProject.Entities.Dtos.AppUserDtos;
 using JwtProject.WebApi.CustomFilters;
@@ -54,14 +55,27 @@ namespace JwtProject.WebApi.Controllers
 
         [HttpPost("[action]")]
         [ValidModel]
-        public async Task<IActionResult> SignUp(AppUserAddDto appUserAddDto)
+        public async Task<IActionResult> SignUp(AppUserAddDto appUserAddDto , [FromServices] IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
         {
             var appUser = await _appUserService.FindByUserName(appUserAddDto.FullName);
             if (appUser != null)
             {
                 return BadRequest($"{appUserAddDto.UserName} zaten alınmış.");
             }
+
             await _appUserService.Add(_mapper.Map<AppUser>(appUserAddDto));
+
+            var user = await _appUserService.FindByUserName(appUserAddDto.UserName);
+            var role = await appRoleService.FindByName(RoleInfo.Member);
+
+
+            await appUserRoleService.Add(new AppUserRole
+            {
+                AppRoleId = role.Id,
+                AppUserId = user.Id
+            });
+
+
             return Created("", appUserAddDto);
         }
     }

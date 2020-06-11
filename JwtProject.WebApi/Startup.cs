@@ -53,7 +53,7 @@ namespace JwtProject.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , IAppUserService appUserService, IAppUserRoleService appUserRoleService, IAppRoleService appRoleService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAppUserService appUserService, IAppUserRoleService appUserRoleService, IAppRoleService appRoleService)
         {
             //if (env.IsDevelopment())
             //{
