@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Jwt.Business.Interfaces;
 using JwtProject.Entities.Concrete;
 using JwtProject.Entities.Dtos.ProductDtos;
@@ -15,10 +16,12 @@ namespace JwtProject.WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IProductService _productService;
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
         //api/products
         [HttpGet]
@@ -43,16 +46,16 @@ namespace JwtProject.WebApi.Controllers
         public async Task<IActionResult> Add(ProductAddDto productAddDto)
         {
            
-            await _productService.Add(new Product { Name = productAddDto.Name });
+            await _productService.Add(_mapper.Map<Product>(productAddDto));
             return Created("", productAddDto);
            
         }
 
         [HttpPut]
         [ValidModel]
-        public async Task<IActionResult> Update(Product product)
+        public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
-            await _productService.Update(product);
+            await _productService.Update(_mapper.Map<Product>(productUpdateDto));
             return NoContent();
         }
 
