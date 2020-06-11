@@ -7,6 +7,7 @@ using Jwt.Business.Interfaces;
 using JwtProject.Entities.Concrete;
 using JwtProject.Entities.Dtos.ProductDtos;
 using JwtProject.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -75,6 +76,16 @@ namespace JwtProject.WebApi.Controllers
         public IActionResult Test(int id)
         {
             return Ok();
+        }
+
+        [Route("/error")]
+        public IActionResult Error()
+        {
+            var errorInfo = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            
+            // loglama
+
+            return Problem(detail: "api da bir hata olustu, en kisa zamanda düzeltilecek");
         }
     }
 }
