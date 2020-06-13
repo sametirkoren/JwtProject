@@ -7,7 +7,9 @@ using Jwt.Business.Interfaces;
 using Jwt.Business.StringInfos;
 using JwtProject.Entities.Concrete;
 using JwtProject.Entities.Dtos.AppUserDtos;
+using JwtProject.Entities.Token;
 using JwtProject.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +29,7 @@ namespace JwtProject.WebApi.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("[action]")]
+        [HttpPost("[action]")]
         [ValidModel]
         public async Task<IActionResult> SignIn(AppUserLoginDto appUserLoginDto)
         {
@@ -45,7 +47,10 @@ namespace JwtProject.WebApi.Controllers
                 {
                     var roles = await _appUserService.GetRolesByUserName(appUserLoginDto.UserName);
                     var token = _jwtService.GenereateJwtToken(appUser, roles);
-                    return Created("", token);
+
+                    JwtAccessToken jwtAccessToken = new JwtAccessToken();
+                    jwtAccessToken.Token = token;
+                    return Created("", jwtAccessToken);
                 }
 
                 return BadRequest("Kullanıcı adı veya şifre hatalı");
@@ -78,5 +83,26 @@ namespace JwtProject.WebApi.Controllers
 
             return Created("", appUserAddDto);
         }
+
+       
+        [HttpGet("[action]")]
+        [Authorize]
+        public async Task<IActionResult> ActiveUser()
+        {
+            var user = await _appUserService.FindByUserName(User.Identity.Name);
+            var roles = await _appUserService.GetRolesByUserName(User.Identity.Name);
+
+
+            AppUserDto appUserDto = new AppUserDto
+            {
+                FullName = user.FullName,
+                UserName = user.UserName,
+                Roles = roles.Select(I => I.Name).ToList()
+            };
+
+
+            return Ok(appUserDto);
+        }
+
     }
 }

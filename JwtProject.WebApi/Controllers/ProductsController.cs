@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Jwt.Business.Interfaces;
+using Jwt.Business.StringInfos;
 using JwtProject.Entities.Concrete;
 using JwtProject.Entities.Dtos.ProductDtos;
 using JwtProject.WebApi.CustomFilters;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,7 @@ namespace JwtProject.WebApi.Controllers
         }
         //api/products
         [HttpGet]
+        [Authorize(Roles=RoleInfo.Admin+","+RoleInfo.Member)]
         public async Task<IActionResult> GetAll()
         {
             var products =await  _productService.GetAll();
@@ -35,7 +38,9 @@ namespace JwtProject.WebApi.Controllers
         //api/products/3
 
         [HttpGet("{id}")]
+        [Authorize(Roles = RoleInfo.Admin)]
         [ServiceFilter(typeof(ValidId<Product>))]
+        
         public async Task<IActionResult> GetById (int id)
         {
             var product = await _productService.GetById(id);
@@ -43,7 +48,9 @@ namespace JwtProject.WebApi.Controllers
             return Ok(product);
         }
         [HttpPost]
+        [Authorize(Roles = RoleInfo.Admin)]
         [ValidModel]
+      
         public async Task<IActionResult> Add(ProductAddDto productAddDto)
         {
            
@@ -53,7 +60,9 @@ namespace JwtProject.WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = RoleInfo.Admin)]
         [ValidModel]
+        
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
             await _productService.Update(_mapper.Map<Product>(productUpdateDto));
@@ -62,6 +71,7 @@ namespace JwtProject.WebApi.Controllers
 
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = RoleInfo.Admin)]
         [ServiceFilter(typeof(ValidId<Product>))]
         public async Task<IActionResult> Delete(int id)
         {
